@@ -1,0 +1,179 @@
+# ============================================
+# SECURITY - NEVER COMMIT THESE FILES
+# ============================================
+
+# Credentials & Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+api_keys.txt
+credentials.json
+secrets.yaml
+secrets.yml
+.secrets/
+config/secrets/
+
+# API Keys & Tokens
+**/api_key
+**/api-key
+**/.api_key
+*.secret
+token.txt
+auth_token*
+
+# Client Data & Proprietary Information
+**/client-data/
+**/production-data/
+**/proprietary/
+**/internal/
+**/client-docs/
+**/private/
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+dump.sql
+backup.sql
+
+# Configuration Files (Production)
+config.production.json
+config.prod.json
+.config/production/
+settings.production.*
+prod.config.*
+
+# ============================================
+# BUILD ARTIFACTS
+# ============================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv
+venv/
+ENV/
+env/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+package-lock.json
+yarn.lock
+
+# ============================================
+# IDE & EDITOR FILES
+# ============================================
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# OPERATING SYSTEM FILES
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================
+# LOGS & TEMPORARY FILES
+# ============================================
+
+*.log
+logs/
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ============================================
+# BACKUP FILES
+# ============================================
+
+*.bak
+*.backup
+*.old
+*.orig
+*-backup
+*-old
+
+# ============================================
+# PRIVATE NOTES & DOCUMENTATION
+# ============================================
+
+# Private notes
+NOTES.txt
+TODO.txt
+PRIVATE.md
+notes/
+scratch/
+
+# Keep these example files
+!.env.example
+!config.example.json
+!settings.example.yaml

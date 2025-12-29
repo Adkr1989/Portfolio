@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ari Klopfer | AI Agent Engineer | Chicago Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --bg-hover: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #8a8a9a;
+            --accent-primary: #00ff88;
+            --accent-secondary: #00d4ff;
+            --accent-tertiary: #a855f7;
+            --accent-gold: #ffd700;
+            --accent-pink: #ff6b9d;
+            --border: #2a2a3a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 60%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .role {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .hero-stat-value.gold { color: var(--accent-gold); }
+        .hero-stat-value.green { color: var(--accent-primary); }
+        .hero-stat-value.blue { color: var(--accent-secondary); }
+        .hero-stat-value.purple { color: var(--accent-tertiary); }
+
+        .hero-stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Value Proposition */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent, var(--accent-primary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-accent, var(--accent-primary));
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.1);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-card:nth-child(1) { --card-accent: var(--accent-primary); }
+        .value-card:nth-child(2) { --card-accent: var(--accent-secondary); }
+        .value-card:nth-child(3) { --card-accent: var(--accent-tertiary); }
+
+        .value-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--card-accent, var(--accent-primary));
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .skills-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .skill-info {
+            flex: 1;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: var(--bg-hover);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-secondary);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+        }
+
+        .project-status {
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .project-status.production {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--accent-primary);
+        }
+
+        .project-status.development {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent-secondary);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Benchmark Section */
+        .benchmark-highlight {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
+            border: 2px solid var(--accent-gold);
+            border-radius: 32px;
+            padding: 4rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .benchmark-number {
+            font-size: 8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-gold), #ff9f43);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .benchmark-label {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .benchmark-breakdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .breakdown-item {
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .breakdown-value.green { color: var(--accent-primary); }
+        .breakdown-value.blue { color: var(--accent-secondary); }
+        .breakdown-value.purple { color: var(--accent-tertiary); }
+        .breakdown-value.pink { color: var(--accent-pink); }
+
+        .breakdown-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Differentiators */
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .diff-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .diff-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+
+        .diff-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .diff-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .diff-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                var(--accent-primary),
+                var(--accent-secondary),
+                var(--accent-tertiary),
+                var(--accent-pink)
+            );
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg-dark);
+        }
+
+        .timeline-item:nth-child(2)::before { background: var(--accent-secondary); }
+        .timeline-item:nth-child(3)::before { background: var(--accent-tertiary); }
+        .timeline-item:nth-child(4)::before { background: var(--accent-pink); }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 32px;
+            padding: 4rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-secondary);
+            color: var(--accent-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-secondary);
+            color: #000;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: white; color: black; }
+            .hero { min-height: auto; padding: 2rem; }
+            .value-card, .project-card, .diff-card { border: 1px solid #ddd; }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .value-grid, .diff-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-container { grid-template-columns: 1fr; }
+            .benchmark-breakdown { grid-template-columns: repeat(2, 1fr); }
+            .benchmark-number { font-size: 5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ari Klopfer</h1>
+            <p class="role">AI Agent & Developer Tools Engineer</p>
+            <p class="tagline">
+                I build production AI systems at 918x cost efficiency.
+                65 days. 363K lines of code. 4 production applications.
+            </p>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value gold">918x</div>
+                    <div class="hero-stat-label">Cost Efficiency</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value green">363K+</div>
+                    <div class="hero-stat-label">Lines of Code</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value blue">6</div>
+                    <div class="hero-stat-label">MCP Servers</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value purple">4</div>
+                    <div class="hero-stat-label">Production Systems</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Why Hire Me?</h2>
+            <p>I've developed a systematic approach to AI-augmented development that delivers unprecedented results.</p>
+        </div>
+
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-number">918x</div>
+                <div class="value-title">Cost Efficiency</div>
+                <div class="value-desc">
+                    I delivered $458,900 in equivalent development value at a cost of ~$500.
+                    Traditional teams can't compete with AI-native development methodology.
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-number">65</div>
+                <div class="value-title">Days to Production</div>
+                <div class="value-desc">
+                    From zero to 4 production systems with 126 commits.
+                    What traditional teams build in quarters, I build in weeks.
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-number">6</div>
+                <div class="value-title">MCP Servers</div>
+                <div class="value-desc">
+                    Built production MCP servers from scratch enabling AI agents
+                    to interact with databases, workflows, browsers, and system tools.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Technical Expertise</h2>
+            <p>Full-stack AI engineering with deep specialization in agent architectures.</p>
+        </div>
+
+        <div class="skills-container">
+            <div class="skills-column">
+                <h3>AI & Agent Development</h3>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🤖</div>
+                    <div class="skill-info">
+                        <div class="skill-name">Claude Agent SDK</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🔧</div>
+                    <div class="skill-info">
+                        <div class="skill-name">MCP Server Development</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🧠</div>
+                    <div class="skill-info">
+                        <div class="skill-name">Multi-Agent Orchestration</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🎯</div>
+                    <div class="skill-info">
+                        <div class="skill-name">Fine-Tuning (Ollama/HuggingFace)</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-column">
+                <h3>Full-Stack Engineering</h3>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🐍</div>
+                    <div class="skill-info">
+                        <div class="skill-name">Python / FastAPI</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">⚛️</div>
+                    <div class="skill-info">
+                        <div class="skill-name">React / TypeScript</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 82%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🔄</div>
+                    <div class="skill-info">
+                        <div class="skill-name">N8N Workflow Automation</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-icon">🚀</div>
+                    <div class="skill-info">
+                        <div class="skill-name">Railway / Cloud Deployment</div>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Production Systems -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Production Systems</h2>
+            <p>Real applications deployed and serving real users.</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📊</div>
+                    <span class="project-status production">Production</span>
+                </div>
+                <div class="project-title">EV_LV Grant Intelligence</div>
+                <div class="project-desc">
+                    AI-powered grant tracking for EV charging infrastructure. Features AVA assistant
+                    with 10 specialized tools, 12+ N8N workflows, and real-time eligibility analysis.
+                </div>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">3,285</div>
+                        <div class="metric-label">Files</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">76</div>
+                        <div class="metric-label">Commits</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">12+</div>
+                        <div class="metric-label">Workflows</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🎛️</div>
+                    <span class="project-status production">Production</span>
+                </div>
+                <div class="project-title">ADEV Agent Dashboard</div>
+                <div class="project-desc">
+                    Real-time agent orchestration platform with WebSocket streaming, secure authentication,
+                    and multi-project management across 5 interconnected systems.
+                </div>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">6</div>
+                        <div class="metric-label">MCP Servers</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">7</div>
+                        <div class="metric-label">Subagents</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">HTTPS</div>
+                        <div class="metric-label">Security</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">🛡️</div>
+                    <span class="project-status development">Development</span>
+                </div>
+                <div class="project-title">Maine Scientific Compliance</div>
+                <div class="project-desc">
+                    FDA/GMP/HACCP compliance automation platform with fine-tuned compliance model,
+                    PowerShell automation, and 600+ line database schema.
+                </div>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">994MB</div>
+                        <div class="metric-label">Fine-tuned Model</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">25</div>
+                        <div class="metric-label">DB Tables</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">21 CFR</div>
+                        <div class="metric-label">Coverage</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-icon">📱</div>
+                    <span class="project-status development">85% Complete</span>
+                </div>
+                <div class="project-title">Consumer SaaS Product</div>
+                <div class="project-desc">
+                    Full-stack SaaS with React/Vite frontend, FastAPI backend, Stripe integration,
+                    and local AI agent runner. 4-tier pricing from Free to Enterprise.
+                </div>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">2,780+</div>
+                        <div class="metric-label">Frontend LOC</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">8</div>
+                        <div class="metric-label">API Endpoints</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">Pricing Tiers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benchmark Highlight -->
+    <section class="section">
+        <div class="benchmark-highlight">
+            <div class="benchmark-number">$458,900</div>
+            <div class="benchmark-label">Equivalent Development Value in 65 Days</div>
+
+            <div class="benchmark-breakdown">
+                <div class="breakdown-item">
+                    <div class="breakdown-value green">~$500</div>
+                    <div class="breakdown-label">Actual Cost</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value blue">126</div>
+                    <div class="breakdown-label">Commits</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value purple">363K+</div>
+                    <div class="breakdown-label">Lines of Code</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="breakdown-value pink">99.9%</div>
+                    <div class="breakdown-label">Cost Reduction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Differentiates Me -->
+    <section class="section">
+        <div class="section-header">
+            <h2>What Differentiates Me</h2>
+            <p>Beyond technical skills, a proven methodology for the future of development.</p>
+        </div>
+
+        <div class="diff-grid">
+            <div class="diff-card">
+                <div class="diff-icon">🧠</div>
+                <div class="diff-title">AI-Native Development</div>
+                <div class="diff-desc">
+                    I don't just use AI as a tool - I've developed a systematic Human-AI Partnership
+                    methodology that achieves 918x cost efficiency. This approach scales to any domain.
+                </div>
+            </div>
+
+            <div class="diff-card">
+                <div class="diff-icon">🏗️</div>
+                <div class="diff-title">Full MCP Architecture</div>
+                <div class="diff-desc">
+                    Built 6 production MCP servers from scratch. I understand the protocol deeply
+                    and can extend AI capabilities to any system integration.
+                </div>
+            </div>
+
+            <div class="diff-card">
+                <div class="diff-icon">📊</div>
+                <div class="diff-title">Documentation-First</div>
+                <div class="diff-desc">
+                    Fractal Docs Protocol ensures every feature is documented as built.
+                    Reports generated automatically. Knowledge captured for continuity.
+                </div>
+            </div>
+
+            <div class="diff-card">
+                <div class="diff-icon">🚀</div>
+                <div class="diff-title">Rapid Production</div>
+                <div class="diff-desc">
+                    Concept to production in days. Railway, N8N Cloud, Ollama local models.
+                    I ship fast without sacrificing quality.
+                </div>
+            </div>
+
+            <div class="diff-card">
+                <div class="diff-icon">🔄</div>
+                <div class="diff-title">Workflow Automation</div>
+                <div class="diff-desc">
+                    12+ N8N workflows plus a complete Python workflow engine.
+                    Automation-first mindset for scalable operations.
+                </div>
+            </div>
+
+            <div class="diff-card">
+                <div class="diff-icon">🎯</div>
+                <div class="diff-title">Domain Versatility</div>
+                <div class="diff-desc">
+                    Grant intelligence, regulatory compliance, client management, consumer SaaS.
+                    Proven ability to learn and build in any domain quickly.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Timeline -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Development Timeline</h2>
+            <p>65 days from inception to 4 production systems.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">October 2025</div>
+                <div class="timeline-title">Foundation Phase</div>
+                <div class="timeline-desc">
+                    Repository creation, API testing framework, CLI agent.
+                    Established the architectural patterns that would scale.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">November 2025</div>
+                <div class="timeline-title">Deployment Phase</div>
+                <div class="timeline-desc">
+                    Railway cloud deployment, N8N workflow integration.
+                    First production systems online.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">December 2025 (Early)</div>
+                <div class="timeline-title">AI Assistant Phase</div>
+                <div class="timeline-desc">
+                    AVA Knowledge Enhancement System, Research Mode with RAG,
+                    Fine-tuning infrastructure deployed.
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">December 2025 (Now)</div>
+                <div class="timeline-title">Production Hardening</div>
+                <div class="timeline-desc">
+                    Security middleware, 6 MCP servers, client deployments,
+                    Consumer product at 85% completion.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+        <div class="cta">
+            <h2>Let's Build the Future Together</h2>
+            <p>
+                I'm seeking opportunities with AI-forward companies in Chicago.
+                My unique combination of technical depth and AI-augmented velocity
+                can help your team ship faster than you thought possible.
+            </p>
+
+            <div class="cta-buttons">
+                <a href="tel:+13126468344" class="btn btn-primary">
+                    📞 Call Me
+                </a>
+                <a href="mailto:arik@adevelopment.io" class="btn btn-secondary">
+                    ✉️ Send Email
+                </a>
+            </div>
+
+            <div class="contact-info">
+                <a href="tel:+13126468344" class="contact-item">📞 (312) 646-8344</a>
+                <a href="mailto:arik@adevelopment.io" class="contact-item">✉️ arik@adevelopment.io</a>
+                <a href="https://github.com/yourusername" class="contact-item">💻 GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" class="contact-item">💼 LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Ari Klopfer</strong> | Chicago, IL | Available for Remote & Hybrid</p>
+        <p style="margin-top: 0.5rem;">
+            65 days • 126 commits • 363K+ lines • 918x efficiency • $458,900 equivalent value
+        </p>
+        <p style="margin-top: 1rem; color: #555;">
+            Generated with Claude Opus 4.5 | December 29, 2025
+        </p>
+    </footer>
+</body>
+</html>
