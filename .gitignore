@@ -173,6 +173,13 @@ PRIVATE.md
 notes/
 scratch/
 
+# Professional Documents (keep private)
+docs/resume.html
+docs/cv.html
+resume.html
+cv.html
+*.pdf
+
 # Keep these example files
 !.env.example
 !config.example.json
