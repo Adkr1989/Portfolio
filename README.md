@@ -1,4 +1,4 @@
-# Ari Klopfer - AI Agent Developer Portfolio
+# Ari - AI Agent Developer Portfolio
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/adevlmml)
 [![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:Ariklopfer@gmail.com)
