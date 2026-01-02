@@ -196,7 +196,7 @@ This documentation provides a high-level overview of the orchestration platform 
 
 The multi-agent orchestration patterns, custom MCP servers, and intelligent routing mechanisms represent significant technical innovation and competitive advantage.
 
-**For detailed architecture discussions, agent demonstrations, or technical deep-dives**, please contact me directly at Ariklopfer@gmail.com.
+**For detailed architecture discussions, agent demonstrations, or technical deep-dives**, please connect with me on [LinkedIn](https://www.linkedin.com/in/adevlmml).
 
 ---
 

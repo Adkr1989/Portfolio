@@ -1,8 +1,6 @@
 # Ari Klopfer - AI Agent Developer Portfolio
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/adevlmml)
-[![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:Ariklopfer@gmail.com)
-[![Location](https://img.shields.io/badge/Location-Chicago%2C%20IL-green)]()
 
 ## 👋 About Me
 
@@ -155,7 +153,7 @@ FDA/GMP/HACCP compliance assistant for food and pharmaceutical manufacturers. Lo
 
 ## 📄 Professional Documents
 
-**Resume and CV available upon request** - Contact me at Ariklopfer@gmail.com or (312) 646-8344
+**Resume and CV available upon request** - Connect with me on [LinkedIn](https://www.linkedin.com/in/adevlmml)
 
 ## 🎨 Portfolio Showcases
 
@@ -219,11 +217,8 @@ Now I build them.
 
 I understand how businesses actually operate—the permits, the compliance requirements, the stakeholders who need solutions explained without jargon. Combined with deep proficiency in Claude Agent SDK and multi-agent orchestration, I deliver AI solutions that work on day one because they're built by someone who's lived the problems they solve.
 
-## 📬 Contact
+## 📬 Connect
 
-- **Email:** Ariklopfer@gmail.com
-- **Phone:** (312) 646-8344
-- **Location:** Chicago, IL 60647
 - **LinkedIn:** [Connect with me](https://www.linkedin.com/in/adevlmml)
 - **GitHub:** You're here!
 
@@ -259,7 +254,7 @@ If you're interested in:
 - Proprietary implementation discussions
 - Code reviews or technical assessments
 
-**Please contact me directly** at Ariklopfer@gmail.com or (312) 646-8344.
+**Please connect with me on [LinkedIn](https://www.linkedin.com/in/adevlmml)** for detailed discussions.
 
 ---
 

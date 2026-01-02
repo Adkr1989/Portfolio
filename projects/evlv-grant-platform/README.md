@@ -149,7 +149,7 @@ This project demonstrates:
 
 This documentation provides a high-level overview of the system architecture and business outcomes. **Implementation details, proprietary algorithms, tool configurations, and client-specific business logic are not included** to protect intellectual property.
 
-**For detailed technical discussions, architecture deep-dives, or live demonstrations**, please contact me directly at Ariklopfer@gmail.com.
+**For detailed technical discussions, architecture deep-dives, or live demonstrations**, please connect with me on [LinkedIn](https://www.linkedin.com/in/adevlmml).
 
 The patterns and approaches demonstrated here represent significant R&D investment and competitive advantage.
 
