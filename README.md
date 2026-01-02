@@ -19,7 +19,7 @@ AI Agent Developer with hands-on experience across construction, energy consulti
 |--------|-------|
 | Production Code | 363,000+ lines |
 | Production Systems | 5 deployed |
-| Git Commits | 126 |
+| Git Commits | 127 |
 | AI Tools Built | 12 specialized agents |
 | Monthly Recurring Revenue | $500 |
 | Revenue Pipeline | $2,000+ |
@@ -31,7 +31,7 @@ AI Agent Developer with hands-on experience across construction, energy consulti
 ### EV_LV Grant Intelligence Platform
 **Status:** 🟢 Production | **Revenue:** $500/month
 
-Production AI system for EV charging grant research serving Law Ventures LTD. Features AVA conversational agent with 12 specialized tools covering grant eligibility (200K+ programs indexed), NEVI compliance verification, and automated funding calculations.
+Production AI system for EV charging grant research serving energy consulting clients. Features conversational AI agent with specialized tools covering grant eligibility (200K+ programs indexed), NEVI compliance verification, and automated funding calculations.
 
 **Tech Stack:** Claude API, Node.js, TypeScript, Railway, PostgreSQL, n8n, WebSocket
 
