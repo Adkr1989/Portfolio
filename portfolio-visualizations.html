@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Metrics Visualizations | Ari Klopfer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .card h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .metric {
+            margin-bottom: 25px;
+        }
+
+        .metric-label {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            border-radius: 15px;
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 120px;
+            font-size: 0.9em;
+            color: #a0a0a0;
+        }
+
+        .bar-visual {
+            flex: 1;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff006e, #00d4ff);
+            border-radius: 12px;
+            transition: width 1.5s ease-out;
+        }
+
+        .bar-value {
+            min-width: 80px;
+            text-align: right;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-date {
+            min-width: 100px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 3px solid #00ff88;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .timeline-desc {
+            color: #a0a0a0;
+            font-size: 0.9em;
+        }
+
+        .comparison-chart {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .comparison-bar {
+            flex: 1;
+            text-align: center;
+        }
+
+        .comparison-visual {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .comparison-fill {
+            background: linear-gradient(180deg, #00d4ff, #0088ff);
+            border-radius: 8px 8px 0 0;
+            transition: height 1.5s ease-out;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 10px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .comparison-label {
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .kpi-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .kpi-label {
+            font-size: 0.9em;
+            color: #a0a0a0;
+        }
+
+        .kpi-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            font-size: 0.75em;
+            color: #00ff88;
+            margin-top: 10px;
+        }
+
+        .pie-chart {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+        }
+
+        .stat-value {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-chart {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stats-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 1px solid #00d4ff;
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            background: #00d4ff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Portfolio Metrics Visualizations</h1>
+            <p class="subtitle">Interactive data dashboard showcasing production work and development velocity</p>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2><span class="icon">🎯</span>Executive Summary</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">363K+</div>
+                    <div class="kpi-label">Lines of Code</div>
+                    <div class="kpi-badge">Production</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">5</div>
+                    <div class="kpi-label">Systems Deployed</div>
+                    <div class="kpi-badge">100% Uptime</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">127</div>
+                    <div class="kpi-label">Git Commits</div>
+                    <div class="kpi-badge">65 Days</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$500</div>
+                    <div class="kpi-label">Monthly Revenue</div>
+                    <div class="kpi-badge">MRR</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">918x</div>
+                    <div class="kpi-label">Cost Efficiency</div>
+                    <div class="kpi-badge">AI-Powered</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">$459K</div>
+                    <div class="kpi-label">Development Value</div>
+                    <div class="kpi-badge">65 Days</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Development Velocity -->
+            <div class="card">
+                <h2><span class="icon">⚡</span>Development Velocity</h2>
+                <div class="metric">
+                    <div class="metric-label">Lines of Code per Day</div>
+                    <div class="metric-value">5,585</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;" data-animate="100">14x above average</div>
+                    </div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Commits per Day</div>
+                    <div class="metric-value">1.95</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%;" data-animate="65">Optimal</div>
+                    </div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Value Created per Day</div>
+                    <div class="metric-value">$7,060</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;" data-animate="90">Exceptional</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio vs Production -->
+            <div class="card">
+                <h2><span class="icon">📈</span>Portfolio vs Production</h2>
+                <div class="comparison-chart">
+                    <div class="comparison-bar">
+                        <div class="comparison-visual">
+                            <div class="comparison-fill" style="height: 3.2%;" data-animate="3.2">3.2%</div>
+                        </div>
+                        <div class="comparison-label">Portfolio<br/>11,471 LOC</div>
+                    </div>
+                    <div class="comparison-bar">
+                        <div class="comparison-visual">
+                            <div class="comparison-fill" style="height: 100%;" data-animate="100">100%</div>
+                        </div>
+                        <div class="comparison-label">Production<br/>363,000 LOC</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Distribution -->
+            <div class="card">
+                <h2><span class="icon">💻</span>Code Distribution (Portfolio)</h2>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-label">HTML</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 78.6%;" data-animate="78.6"></div>
+                        </div>
+                        <div class="bar-value">78.6%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Python</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 12.1%;" data-animate="12.1"></div>
+                        </div>
+                        <div class="bar-value">12.1%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Markdown</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 9.3%;" data-animate="9.3"></div>
+                        </div>
+                        <div class="bar-value">9.3%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Production Language Distribution -->
+            <div class="card">
+                <h2><span class="icon">🔧</span>Code Distribution (Production)</h2>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-label">TypeScript</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 40%;" data-animate="40"></div>
+                        </div>
+                        <div class="bar-value">40%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Python</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 35%;" data-animate="35"></div>
+                        </div>
+                        <div class="bar-value">35%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">React/JSX</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 15%;" data-animate="15"></div>
+                        </div>
+                        <div class="bar-value">15%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">PowerShell</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 5%;" data-animate="5"></div>
+                        </div>
+                        <div class="bar-value">5%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Other</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 5%;" data-animate="5"></div>
+                        </div>
+                        <div class="bar-value">5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Breakdown -->
+            <div class="card">
+                <h2><span class="icon">🚀</span>Production Systems Breakdown</h2>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-label">EV_LV Platform</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 33%;" data-animate="33"></div>
+                        </div>
+                        <div class="bar-value">120K LOC</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Consumer SaaS</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 27.5%;" data-animate="27.5"></div>
+                        </div>
+                        <div class="bar-value">100K LOC</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">ADEV Dashboard</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 22%;" data-animate="22"></div>
+                        </div>
+                        <div class="bar-value">80K LOC</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Maine Scientific</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 13.75%;" data-animate="13.75"></div>
+                        </div>
+                        <div class="bar-value">50K LOC</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Infrastructure</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 3.5%;" data-animate="3.5"></div>
+                        </div>
+                        <div class="bar-value">13K LOC</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance vs Industry -->
+            <div class="card">
+                <h2><span class="icon">🏆</span>Performance vs Industry Benchmarks</h2>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-label">Development Speed</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 100%;" data-animate="100"></div>
+                        </div>
+                        <div class="bar-value">14x above avg</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Time to Market</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 85%;" data-animate="85"></div>
+                        </div>
+                        <div class="bar-value">2-7x faster</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Test Coverage</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 100%;" data-animate="100"></div>
+                        </div>
+                        <div class="bar-value">100% critical</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">System Uptime</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 99.8%;" data-animate="99.8"></div>
+                        </div>
+                        <div class="bar-value">99.8%</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-label">Client Retention</div>
+                        <div class="bar-visual">
+                            <div class="bar-fill" style="width: 100%;" data-animate="100"></div>
+                        </div>
+                        <div class="bar-value">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Development Timeline -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2><span class="icon">📅</span>Development Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 0</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Project Inception</div>
+                        <div class="timeline-desc">Started AI agent development journey</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 15</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">EV_LV Platform MVP</div>
+                        <div class="timeline-desc">50,000 lines - First production system deployed</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 30</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">ADEV Dashboard Launch</div>
+                        <div class="timeline-desc">150,000 lines total - Multi-agent orchestration platform</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 45</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Consumer SaaS Development</div>
+                        <div class="timeline-desc">250,000 lines total - React + FastAPI platform started</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 60</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Maine Scientific Platform</div>
+                        <div class="timeline-desc">340,000 lines total - FDA compliance assistant added</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Day 65</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Current State</div>
+                        <div class="timeline-desc">363,000 lines - 5 production systems, $500 MRR, 127 commits</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Statistics -->
+        <div class="grid">
+            <div class="card">
+                <h2><span class="icon">📊</span>Portfolio Repository Stats</h2>
+                <div class="stats-summary">
+                    <div class="stat-item">
+                        <div class="stat-label">Total Lines</div>
+                        <div class="stat-value">11,471</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Git Commits</div>
+                        <div class="stat-value">10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Active Days</div>
+                        <div class="stat-value">5</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Repository Size</div>
+                        <div class="stat-value">1.1 MB</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Lines/Day</div>
+                        <div class="stat-value">2,294</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Files</div>
+                        <div class="stat-value">21</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="icon">💰</span>Business Metrics</h2>
+                <div class="stats-summary">
+                    <div class="stat-item">
+                        <div class="stat-label">Monthly Revenue</div>
+                        <div class="stat-value">$500</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Revenue Pipeline</div>
+                        <div class="stat-value">$2,000+</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Cost Efficiency</div>
+                        <div class="stat-value">918x</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Dev Value</div>
+                        <div class="stat-value">$459K</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">$ per LOC/year</div>
+                        <div class="stat-value">$0.0165</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Client Retention</div>
+                        <div class="stat-value">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-links">
+            <a href="index.html">← Back to Portfolio</a>
+            <a href="PORTFOLIO_STATISTICS.md">📊 Detailed Statistics</a>
+            <a href="README.md">📖 Main README</a>
+        </div>
+    </div>
+
+    <script>
+        // Animate on page load
+        window.addEventListener('load', function() {
+            // Animate progress bars
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-animate');
+                setTimeout(() => {
+                    bar.style.width = targetWidth + '%';
+                }, 100);
+            });
+
+            // Animate bar charts
+            const barFills = document.querySelectorAll('.bar-fill');
+            barFills.forEach((bar, index) => {
+                const targetWidth = bar.getAttribute('data-animate');
+                setTimeout(() => {
+                    bar.style.width = targetWidth + '%';
+                }, 200 + (index * 100));
+            });
+
+            // Animate comparison chart
+            const comparisonFills = document.querySelectorAll('.comparison-fill');
+            comparisonFills.forEach((fill, index) => {
+                const targetHeight = fill.getAttribute('data-animate');
+                setTimeout(() => {
+                    fill.style.height = targetHeight + '%';
+                }, 500 + (index * 200));
+            });
+
+            // Add fade-in animation to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>

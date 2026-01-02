@@ -26,7 +26,9 @@ AI Agent Developer with hands-on experience across construction, energy consulti
 | Cost Efficiency | 918x |
 | Development Value | $458,900 in 65 days |
 
-> **📊 [View Comprehensive Statistics & Analysis](./PORTFOLIO_STATISTICS.md)** - Detailed benchmarks, unique findings, KPIs, and production work breakdown
+> **📊 [View Interactive Visualizations](./portfolio-visualizations.html)** - Animated charts, graphs, and visual analytics dashboard
+>
+> **📈 [View Comprehensive Statistics & Analysis](./PORTFOLIO_STATISTICS.md)** - Detailed benchmarks, unique findings, KPIs, and production work breakdown
 
 ## 🚀 Featured Projects
 
