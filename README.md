@@ -136,6 +136,9 @@ FDA/GMP/HACCP compliance assistant for food and pharmaceutical manufacturers. Lo
 ```
 ├── README.md                        # Main portfolio documentation
 ├── PORTFOLIO_STATISTICS.md          # 📊 Comprehensive metrics & benchmarks
+├── SECURITY_AUDIT.md                # 🔒 Security & IP protection audit
+├── X_TWITTER_STRATEGY.md            # 🐦 X/Twitter engagement strategy
+├── READY_TO_POST_TWEETS.md          # 📱 Ready-to-use tweet templates
 ├── docs/                            # Resume, CV, credentials
 ├── projects/                        # Project architecture & documentation
 │   ├── evlv-grant-platform/
@@ -150,6 +153,8 @@ FDA/GMP/HACCP compliance assistant for food and pharmaceutical manufacturers. Lo
 ```
 
 **📊 [View Detailed Statistics & Benchmarks](./PORTFOLIO_STATISTICS.md)** - Deep dive into portfolio metrics, production work breakdown, unique findings, and KPI analysis
+
+**🐦 [X/Twitter Engagement Strategy](./X_TWITTER_STRATEGY.md)** - Complete guide to building presence in the AI community on X
 
 ## 📄 Professional Documents
 
