@@ -27,7 +27,7 @@ AI Agent Developer with hands-on experience across construction, energy consulti
 ## 🚀 Featured Projects
 
 ### EV_LV Grant Intelligence Platform
-**Status:** 🟢 Production | **Revenue:** $500/month
+**Status:** 🟢 Production | **Revenue Generating:** 
 
 Production AI system for EV charging grant research serving Law Ventures LTD. Features AVA conversational agent with 12 specialized tools covering grant eligibility (200K+ programs indexed), NEVI compliance verification, and automated funding calculations.
 
