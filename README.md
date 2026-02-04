@@ -178,6 +178,11 @@ I created a comprehensive guide for optimizing Claude Code's `CLAUDE.md` configu
 │   ├── claude-agent-sdk/
 │   ├── fastapi-patterns/
 │   └── automation/
+├── marketing/               # Outreach resources & templates
+│   ├── LINKEDIN_UPDATE.md
+│   ├── COMMUNITY_ENGAGEMENT_SYSTEM.md
+│   ├── READY_TO_POST.md
+│   └── GITHUB_PORTFOLIO_STRATEGY.md
 ├── tutorials/               # Technical guides
 └── assets/                  # Diagrams, screenshots
 ```
